@@ -3,7 +3,6 @@ Tests for the Django admin modifications.
 """
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-
 from django.test import Client
 from django.urls import reverse
 
@@ -24,7 +23,6 @@ class AdminSiteTests(TestCase):
             password='testpass123',
             name='Test User'
         )
-
     def test_edit_user_page(self):
         """Test the edit user page works."""
         url = reverse('admin:core_user_change', args=[self.user.id])
