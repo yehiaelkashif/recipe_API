@@ -23,6 +23,7 @@ class AdminSiteTests(TestCase):
             password='testpass123',
             name='Test User'
         )
+
     def test_edit_user_page(self):
 
         """Test the edit user page works."""
