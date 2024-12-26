@@ -8,7 +8,6 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 
-
 class UserManager(BaseUserManager):
     """Manager for users."""
 
@@ -38,5 +37,4 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
-
     USERNAME_FIELD = 'email'
