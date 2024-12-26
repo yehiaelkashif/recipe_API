@@ -8,6 +8,7 @@ from core import models
 
 class UserAdmin(BaseUserAdmin):
     """Define the admin pages for users."""
+    
     ordering = ['id']
     list_display = ['email', 'name']
     fieldsets = (
