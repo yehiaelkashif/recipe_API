@@ -1,6 +1,7 @@
 """
 Database models.
 """
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -39,3 +40,44 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     objects = UserManager()
     USERNAME_FIELD = 'email'
+
+
+
+
+
+class Recipe(models.Model):
+    """Recipe object."""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    CATEGORY_CHOICES = [
+        ('Dessert', 'Dessert'),
+        ('Main Course', 'Main Course'),
+        ('Appetizer', 'Appetizer'),
+        ('Salad', 'Salad'),
+        ('Soup', 'Soup'),
+        ('Beverage', 'Beverage'),
+        ('Snack', 'Snack'),
+    ]
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    time_minutes = models.IntegerField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    link = models.CharField(max_length=255, blank=True)
+    instructions = models.TextField(verbose_name="Cooking Instructions")
+    category = models.CharField(
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        verbose_name="Category",
+        default='Main Course'
+    )
+    preparation_time = models.PositiveIntegerField(verbose_name="Preparation Time (minutes)")
+    cooking_time = models.PositiveIntegerField(verbose_name="Cooking Time (minutes)")
+    servings = models.PositiveIntegerField(verbose_name="Servings")
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name="Date Created")
+
+
+    def __str__(self):
+        return self.title
+    
