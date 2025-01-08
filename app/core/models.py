@@ -76,8 +76,20 @@ class Recipe(models.Model):
     cooking_time = models.PositiveIntegerField(verbose_name="Cooking Time (minutes)")
     servings = models.PositiveIntegerField(verbose_name="Servings")
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Date Created")
+    ingredients = models.ManyToManyField('Ingredient')
 
 
     def __str__(self):
         return self.title
+    
+class Ingredient(models.Model):
+    """Ingredient for recipes."""
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.name
     
